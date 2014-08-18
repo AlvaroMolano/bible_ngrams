@@ -64,21 +64,21 @@ end
 end
 
 puts "Writing out aggregate results"
-CSV.open("./results/unigram/all.csv", "w") do |csv|
+CSV.open("./results/unigram/aggregate.csv", "w") do |csv|
   @all_unigrams.keep_if{|k, v| v > 5}.sort_by{|k, v| [-v, k]}.each do |row|
     gram = row[0]
     count = row[1]
     csv << [gram, count]
   end
 end
-CSV.open("./results/bigram/all.csv", "w") do |csv|
+CSV.open("./results/bigram/aggregate.csv", "w") do |csv|
   @all_bigrams.keep_if{|k, v| v > 5}.sort_by{|k, v| [-v, k]}.each do |row|
     gram = row[0]
     count = row[1]
     csv << [gram, count]
   end
 end
-CSV.open("./results/trigram/all.csv", "w") do |csv|
+CSV.open("./results/trigram/aggregate.csv", "w") do |csv|
   @all_trigrams.keep_if{|k, v| v > 5}.sort_by{|k, v| [-v, k]}.each do |row|
     gram = row[0]
     count = row[1]
