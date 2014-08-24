@@ -3,9 +3,9 @@
 
 require('csv')
 
-require_relative('ngram')
-require_relative('corpus')
-require_relative('bibleCorpusFile')
+require_relative('classes/ngram')
+require_relative('classes/corpus')
+require_relative('classes/bibleCorpusFile')
 
 def analyze_all_books(n, minimum)
   ngrams = Hash.new(0)
