@@ -1,3 +1,5 @@
+# Simple script to automate stripping down the full bibles in the bible_database repository into separate books and version folders
+
 require 'csv'
 
 def rip_version(version_name)
