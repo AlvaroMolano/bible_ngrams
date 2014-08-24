@@ -17,7 +17,7 @@ def analyze_all_versions
   Dir.glob('./corpus/*/') do |version|
     version_name = /corpus\/(.+)\//.match(version)[1]
     (1..10).each do |x|
-      write_result(analyze_version(version_name, x))
+      write_result(analyze_version(version_name, x), 5)
     end
   end
 end

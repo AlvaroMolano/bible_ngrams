@@ -31,4 +31,4 @@ def rip_all
   end
 end
 
-rip_version("ylt")
+#rip_version("ylt")
