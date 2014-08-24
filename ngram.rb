@@ -1,3 +1,4 @@
+# Pretty much straight from http://www.sitepoint.com/natural-language-processing-ruby-n-grams/
 class Ngram
   attr_accessor :options
 

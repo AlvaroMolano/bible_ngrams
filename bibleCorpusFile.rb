@@ -1,3 +1,4 @@
+# http://www.sitepoint.com/natural-language-processing-ruby-n-grams/ was a great starting point
 class BibleCorpusFile
 
   def initialize(path)
