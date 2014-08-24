@@ -7,6 +7,10 @@ require_relative('classes/ngram')
 require_relative('classes/corpus')
 require_relative('classes/bibleCorpusFile')
 
+# Read in stop words
+@stop_words = []
+File.foreach('./stopwords.txt') {|x| @stop_words << x.chomp}
+
 # This will kick off a massive run checking all n-grams
 # from 1-10 across all versions. It will be slow.
 def analyze_all_versions
@@ -40,7 +44,10 @@ def analyze_book(version, book, n)
   results = Hash.new(0)
   # Keep book-specific results
   corpus.ngrams(n).each do |result|
-    results[result.join(' ')] += 1
+    phrase = result.join(' ')
+    if !all_stop_words(phrase)
+      results[phrase] += 1
+    end
   end
   return results
 end
@@ -48,27 +55,48 @@ end
 def write_result(results, minimum=1)
   n = results[:n]
   version = results[:version]
-  results.keys.each do |key, val|
-  if key.is_a? Integer    
-    CSV.open("./results/#{n}-gram/#{version}/#{version}_#{book}.csv", "w") do |csv|
-      csv << ["N-gram", "Count", "Book"]
-      results[key].keep_if{|k, v| v >= minimum}.sort_by{|k, v| [-v, k]}.each do |row|
-        gram = row[0]
-        count = row[1]
-        csv << [gram, count, book]
+
+  base_dir = "./results/#{n}-gram/#{version}/"
+  results.keys.each do |key|
+    # Each of these are individual books
+    if key.is_a? Integer
+
+      # Check to see if we're saving this somewhere that exists
+      if !Dir.exists?("#{base_dir}")
+        Dir.mkdir("#{base_dir}")
       end
-    end
-  else if key == :all
-    CSV.open("./results/#{n}-gram/#{version}.csv", "w") do |csv|
-      csv << ["N-gram", "Count", "Version"]
-      results[:all].keep_if{|k, v| v >= minimum}.sort_by{|k, v| [-v, k]}.each do |row|
-        gram = row[0]
-        count = row[1]
-        csv << [gram, count, version]
+
+      # Open the CSV object to write out this individual book
+      CSV.open("#{base_dir}/#{version}_#{key}.csv", "w") do |csv|
+        csv << ["N-gram", "Count", "Book"] # Header
+        results[key].keep_if{|k, v| v >= minimum}.sort_by{|k, v| [-v, k]}.each do |row|
+          gram = row[0]
+          count = row[1]
+          csv << [gram, count, key]
+        end
+      end
+    # Write out the aggregate stats
+    elsif key == :all
+
+      # Aggregate stats will live in the root directory for that n-gram folder
+      CSV.open("./results/#{n}-gram/#{version}.csv", "w") do |csv|
+        csv << ["N-gram", "Count", "Version"] # Header
+        results[:all].keep_if{|k, v| v >= minimum}.sort_by{|k, v| [-v, k]}.each do |row|
+          gram = row[0]
+          count = row[1]
+          csv << [gram, count, version]
+        end
       end
     end
   end
 end
 
-#test = analyze_version("kjv", 2)
-#uts test[:all].sort_by{|k, v| [-v, k]}.inspect
+def all_stop_words(phrase)
+  acc = true
+  phrase.downcase.split(' ').each do |word|
+    acc = acc && @stop_words.include?(word)
+  end
+  return acc
+end
+
+analyze_all_versions

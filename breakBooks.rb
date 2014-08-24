@@ -30,3 +30,5 @@ def rip_all
     rip_version(version_name)
   end
 end
+
+rip_version("ylt")
