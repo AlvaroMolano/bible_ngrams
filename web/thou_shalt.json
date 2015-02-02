@@ -1,0 +1,81 @@
+{
+  "name": "thou shalt",
+  "children": [
+    {
+     "name": "say",
+     "children": [ {"name": "unto", "size": 17} ]
+    },
+    {
+      "name": "not",
+      "children": [
+        {"name": "be", "size": 16},
+        {"name": "go", "size": 16},
+        {"name": "take", "size": 6},
+        {"name": "uncover", "size": 12}
+      ]
+    },
+    {
+      "name": "know",
+      "children": [ {"name": "that", "size": 12} ]
+    },
+    {
+      "name": "make",
+      "children": [
+        {"name": "the", "size": 12},
+        {"name": "an", "size": 5},
+        {"name": "for", "size": 5},
+        {"name": "a", "size": 8}
+      ]
+    },
+    {
+      "name": "be",
+      "children": [
+        {"name": "a", "size": 10},
+        {"name": "called", "size": 6}
+      ]
+    },
+    {
+      "name": "put",
+      "children": [ {"name": "the", "size": 10} ]
+    },
+    {
+      "name": "love",
+      "children": [ {"name": "thy", "size": 7} ]
+    },
+    {
+      "name": "speak",
+      "children": [ {"name": "unto", "size": 9} ]
+    },
+    {
+      "name": "take",
+      "children": [
+        {"name": "the", "size": 7},
+        {"name": "of", "size": 6}
+      ]
+    },
+    {
+      "name": "no",
+      "children": [ {"name": "more", "size": 6} ]
+    },
+    {
+      "name": "surely",
+      "children": [ {"name": "die", "size": 6} ]
+    },
+    {
+      "name": "deny",
+      "children": [ {"name": "me", "size": 5} ]
+    },
+    {
+      "name": "eat",
+      "children": [ {"name": "the", "size": 5} ]
+    },
+    {
+      "name": "give",
+      "children": [ {"name": "the", "size": 5} ]
+    },
+    {
+      "name": "set",
+      "children": [ {"name": "the", "size": 5} ]
+    }
+  ]
+}
